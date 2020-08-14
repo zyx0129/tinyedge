@@ -1,0 +1,10 @@
+http:
+  build: ./http/http/dynamicLib
+  container_name: edge-http
+  ports:
+    - %#http.port:80
+  volumes:
+    - ./config:/app/config
+  networks:
+  - edge-network
+  restart: always

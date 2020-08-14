@@ -1,0 +1,1 @@
+g++ -std=c++11 OCTree.cpp Limber.cpp SenSys_linux.cpp -o SenSys_linux

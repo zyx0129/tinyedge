@@ -1,0 +1,6 @@
+bluetooth:
+  build: ./bluetooth/dynamicLib
+  container_name: edge-bluetooth
+  network_mode: host
+  restart: always
+

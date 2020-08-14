@@ -1,0 +1,22 @@
+version: "3"
+services:
+  device-management:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/device-management
+    container_name: edge-device-management
+    ports:
+      - %#device-management.port:80
+    volumes:
+      - ./config:/app/config
+    networks:
+      - edge-network
+    restart: always
+  %$*cache%{
+  cache:
+      image: registry.cn-hangzhou.aliyuncs.com/tinyedge/redis
+      container_name: edge-cache
+      volumes:
+        - ./cache/data:/data
+      networks:
+        - edge-network
+      restart: always
+  %}

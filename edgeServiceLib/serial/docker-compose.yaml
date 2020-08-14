@@ -1,0 +1,16 @@
+version: "3"
+services:
+  virtual-connector:
+    image: serial-connector
+    #image: registry.cn-hangzhou.aliyuncs.com/tinyedge/virtual-connector
+    container_name: edge-serial-connector
+    volumes:
+      - ./config:/app/config
+    environment:
+      MODULE_NAME: "serial-connector"
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
+      #- "/dev/pts/21:/dev/pts/21"
+    # networks:
+    #   - edge-network
+    restart: always

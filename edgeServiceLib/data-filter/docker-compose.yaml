@@ -1,0 +1,9 @@
+data-filter:
+  build: ./data-filter/data-filter/dynamicLib
+  container_name: edge-data-filter
+  volumes:
+    #- ./config:/app/config
+    - ./config:/app/config
+  networks:
+    - edge-network
+  restart: always

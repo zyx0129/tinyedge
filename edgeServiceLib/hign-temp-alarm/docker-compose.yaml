@@ -1,0 +1,9 @@
+hign-temp-alarm:
+  build: ./hign-temp-alarm/hign-temp-alarm/dynamicLib
+  container_name: edge-hign-temp-alarm
+  volumes:
+    #- ./config:/app/config
+    - ./config:/app/config
+  networks:
+    - edge-network
+  restart: always

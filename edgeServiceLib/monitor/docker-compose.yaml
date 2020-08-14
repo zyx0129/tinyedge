@@ -1,0 +1,10 @@
+resource-monitor:
+  image: registry.cn-hangzhou.aliyuncs.com/tinyedge/resource-monitor
+  container_name: edge-resource-monitor
+  volumes:
+    - ./config:/app/config
+  environment:
+    MODULE_NAME: "monitor"
+  networks:
+    - edge-network
+  restart: always

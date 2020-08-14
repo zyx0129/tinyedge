@@ -1,0 +1,9 @@
+light-control:
+  build: ./light-control/light-control/dynamicLib
+  container_name: edge-light-control
+  volumes:
+    #- ./config:/app/config
+    - ./config:/app/config
+  networks:
+    - edge-network
+  restart: always

@@ -1,0 +1,12 @@
+version: "3"
+services:
+  modbus:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/modbus
+    container_name: edge-modbus
+    volumes:
+      - ./config:/app/config
+    environment:
+      MODULE_NAME: "modbus"
+    networks:
+      - edge-network
+    restart: always

@@ -1,0 +1,17 @@
+version: "3"
+services:
+  virtual-modbus-sensor:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/virtual-modbus-sensor
+    container_name: edge-virtual-modbus-sensor
+    volumes:
+      - ./config:/app/config
+    ports:
+      - %#virtual-modbus-sensor.port:%#virtual-modbus-sensor.port
+    environment:
+      MODULE_NAME: "virtual-modbus-sensor"
+    networks:
+      - edge-network
+    restart: always
+networks:
+    edge-network:
+        driver: "bridge"

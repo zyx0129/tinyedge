@@ -1,0 +1,18 @@
+version: "3"
+services:
+  zookeeper:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/zookeeper
+    container_name: edge-zookeeper
+    restart: always
+    networks: [edge-network]
+  kafka:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/kafka
+    container_name: edge-kafka
+    depends_on: [ zookeeper ]
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://edge-kafka:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    networks: [edge-network]
+    restart: always

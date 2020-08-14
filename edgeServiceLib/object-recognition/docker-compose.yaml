@@ -1,0 +1,12 @@
+version: "3"
+services:
+  obj-rec:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/object-recognition
+    container_name: edge-object-recognition
+    ports:
+    - %#object-recognition.port:80
+    environment:
+      MODULE_NAME: "object-recognition"
+    networks:
+      - edge-network
+    restart: always

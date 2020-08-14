@@ -1,0 +1,21 @@
+# up
+{"action":"dataUpload","device":"device1","data":{"temp":25,"humi":64}}
+
+{"action":"register","device":"device1","data":{"properties":["temp","humi"]}}
+
+{"action":"online","device":"device1","data":{"time":"2020-6-12 11:43:21"}}
+
+{"action":"offline","device":"device1","data":{"time":"2020-6-12 11:43:21"}}
+
+{"action":"batchUpload","data":[{"device":"device1","data":{"temp":25,"humi":64}},{"device":"device2","data":{"temp":28,"humi":31}}]}
+
+{"action":"batchRegister","data":[{"device":"device1","data":{"properties":["temp","humi"]}},{"device":"device2","data":{"properties":["temp","humi"]}}]}
+
+{"action":"batchOnline","data":[{"device":"device1","data":{"time":"2020-6-12 11:43:21"}},{"device":"device2","data":{"time":"2020-6-12 11:43:21"}}]}
+
+{"action":"batchOffline","data":[{"device":"device1","data":{"time":"2020-6-12 11:43:21"}},{"device":"device2","data":{"time":"2020-6-12 11:43:21"}}]}
+
+# down
+{"action":"service","device":"device1","data":{"serviceName":"turnOnLed","params":{}}}
+
+{"action":"batchService","deviceList":["device1","device2"],"data":{"serviceName":"turnOnLed","params":{}}}

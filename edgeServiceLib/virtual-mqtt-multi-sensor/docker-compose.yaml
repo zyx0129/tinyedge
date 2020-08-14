@@ -1,0 +1,15 @@
+version: "3"
+services:
+  virtual-mqtt-multi-sensor:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/virtual-mqtt-multi-sensor
+    container_name: edge-virtual-mqtt-multi-sensor
+    volumes:
+      - ./config:/app/config
+    environment:
+      MODULE_NAME: "virtual-mqtt-multi-sensor"
+    networks:
+      - edge-network
+    restart: always
+networks:
+    edge-network:
+        driver: "bridge"

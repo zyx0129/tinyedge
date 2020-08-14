@@ -1,0 +1,15 @@
+version: "3"
+services:
+  cloud-connector:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/cloud-connector
+    container_name: edge-cloud-connector
+    volumes:
+      - ./config:/app/config
+    environment:
+      MODULE_NAME: "cloud-connector"
+    networks:
+      - edge-network
+    restart: always
+networks:
+    edge-network:
+        driver: "bridge"

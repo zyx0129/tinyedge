@@ -1,0 +1,12 @@
+version: "3"
+services:
+  virtual-connector:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/virtual-connector
+    container_name: edge-virtual-connector
+    volumes:
+      - ./config:/app/config
+    environment:
+      MODULE_NAME: "virtual-connector"
+    networks:
+      - edge-network
+    restart: always

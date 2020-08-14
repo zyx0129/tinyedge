@@ -1,0 +1,26 @@
+version: "3"
+services:
+  influx:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/influxdb
+    container_name: edge-influx
+    volumes:
+      - ./influx/influx/data:/var/lib/influxdb
+    environment:
+      INFLUXDB_DB: %#influx.database
+      INFLUXDB_USER: %#influx.user
+      INFLUXDB_USER_PASSWORD: %#influx.password
+    networks:
+      - edge-network
+    ports:
+      - %#influx.port:8086
+    restart: always
+  influx-client:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/influx-client
+    container_name: edge-influx-client
+    volumes:
+      - ./config:/app/config
+    environment:
+      MODULE_NAME: "influx"
+    networks:
+      - edge-network
+    restart: always

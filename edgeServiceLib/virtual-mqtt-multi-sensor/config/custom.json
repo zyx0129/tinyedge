@@ -1,0 +1,15 @@
+{
+    "router":{},
+    "serviceConfig":{
+        "virtual-mqtt-multi-sensor":{
+            "broker":{
+                "host":"10.214.149.117",
+                "port":1883
+            },
+            "collectCycle":5,
+            "concurrentNum":1
+        }
+    },
+    "serviceInfo":{"virtual-mqtt-lightsensor":"system"},
+    "scene":{"core":"docker-compose"}
+}

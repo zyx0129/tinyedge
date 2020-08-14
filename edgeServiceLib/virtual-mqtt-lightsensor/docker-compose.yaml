@@ -1,0 +1,15 @@
+version: "3"
+services:
+  virtual-mqtt-lightsensor:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/virtual-mqtt-lightsensor
+    container_name: edge-mqtt-lightsensor
+    volumes:
+      - ./config:/app/config
+    environment:
+      MODULE_NAME: "virtual-mqtt-lightsensor"
+    networks:
+      - edge-network
+    restart: always
+networks:
+    edge-network:
+        driver: "bridge"

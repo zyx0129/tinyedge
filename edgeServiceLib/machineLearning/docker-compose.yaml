@@ -1,0 +1,8 @@
+ml:
+  build: ./machineLearning/dynamicLib
+  container_name: edge-ml
+  ports:
+    - %#machineLearning.port:80
+  networks:
+  - edge-network
+  restart: always

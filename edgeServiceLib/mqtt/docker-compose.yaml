@@ -1,0 +1,20 @@
+version: "3"
+services:
+  broker:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/emqx
+    container_name: edge-broker
+    networks:
+      - edge-network
+    ports:
+      - %#mqtt.port:1883
+    restart: always
+  mqtt:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/mqtt-connector
+    container_name: edge-mqtt
+    volumes:
+      - ./config:/app/config
+    environment:
+      MODULE_NAME: "mqtt"
+    networks:
+      - edge-network
+    restart: always

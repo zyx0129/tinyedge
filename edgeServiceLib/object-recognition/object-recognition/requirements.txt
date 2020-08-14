@@ -1,0 +1,7 @@
+flask
+gevent
+pillow
+requests
+keras
+uwsgi
+tensorflow 

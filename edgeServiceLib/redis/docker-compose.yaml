@@ -1,0 +1,12 @@
+redis:
+    image: redis
+    container_name: edge-redis
+    volumes:
+      - ./redis/redis/data:/data
+    networks: [edge-network]
+    restart: always
+redis-recv:
+    build: ./redis/messageRecv/dynamicLib
+    container_name: edge-redis-recv
+    networks: [edge-network]
+    restart: always

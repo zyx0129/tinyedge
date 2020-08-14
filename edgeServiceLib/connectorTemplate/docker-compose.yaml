@@ -1,0 +1,8 @@
+#serviceName:
+  build: ./#serviceName/#serviceName/dynamicLib
+  container_name: edge-#serviceName
+  volumes:
+    - ./config:/app/config
+  networks:
+    - edge-network
+  restart: always

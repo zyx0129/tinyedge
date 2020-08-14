@@ -1,0 +1,13 @@
+version: "3"
+services:
+  #serviceName:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/python-fc
+    container_name: edge-#serviceName
+    volumes:
+      - ./config:/app/config
+      - ./#serviceName/msgRec.py:/app/msgRec.py
+    environment:
+      MODULE_NAME: "#serviceName"
+    networks:
+      - edge-network
+    restart: always

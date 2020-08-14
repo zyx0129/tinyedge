@@ -1,0 +1,12 @@
+version: "3"
+services:
+  virtual-device:
+    image: registry.cn-hangzhou.aliyuncs.com/tinyedge/virtual-device
+    container_name: edge-virtual-device
+    volumes:
+      - ./config:/app/config
+    environment:
+      MODULE_NAME: "virtual-device"
+    networks:
+      - edge-network
+    restart: always

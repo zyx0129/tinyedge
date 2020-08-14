@@ -1,0 +1,11 @@
+mysql:
+  build: ./mysql/dynamicLib
+  container_name: edge-mysql
+  ports:
+    - %#mysql.port:3306
+  volumes:
+    - ./mysql/dynamicLib/data:/var/lib/mysql
+    - ./mysql/dynamicLib/conf:/etc/mysql/conf.d
+  restart: always
+  networks:
+    - edge-network
