@@ -19,7 +19,7 @@ password = ""
 
 configClient = Client()
 
-def dataCollect(pid,host,port,topic):
+def dataCollect(pid,host,port,topic,collectCycle):
     deviceName = "mqtt_smart_lightsensor_" + str(pid)
     appId = "app_1"
     topic = deviceName+"/data/post"
@@ -32,16 +32,18 @@ def dataCollect(pid,host,port,topic):
     client.loop_start()
     while 1:
         light = random.uniform(100,500)
+        nowTime = time.time()
         message ={
             "deviceName":deviceName,
+            "time":str(nowTime),
             "appId":appId,
             "data":{
                 "light":light,
             }
         }
-        print("Publish new message, topic: "+topic+" , msg: "+str(message)+" , timestamp:"+str(time.time()))
+        print("Publish new message, topic: "+topic+" , msg: "+str(message)+" , timestamp:"+str(nowTime))
         client.publish(topic,payload = json.dumps(message),qos = 0)
-        time.sleep(10)
+        time.sleep(collectCycle)
 
 def on_connect(client, userdata, flags, rc): 
     if(rc ==0):
@@ -66,5 +68,5 @@ if __name__ == "__main__":
             appId = config["appId"]
 
     for pid in range(concurrentNum):
-        p = Process(target = dataCollect,args=(pid,host,port,topic,))
+        p = Process(target = dataCollect,args=(pid,host,port,topic,collectCycle,))
         p.start()

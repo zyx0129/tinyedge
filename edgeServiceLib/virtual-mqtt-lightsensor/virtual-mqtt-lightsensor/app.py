@@ -64,13 +64,15 @@ if __name__ == "__main__":
     mqttClient.loop_start()
    
     while 1:
+        nowTime = time.time()
         message ={
             "deviceName":deviceName,
+            "time":str(nowTime),
             "appId":appId,
             "data":{
                 "light":random.uniform(100,500)
             }
         }
-        print("Publish new message, topic: "+topic+" , msg: "+str(message)+" , timestamp:"+str(time.time()))
+        print("Publish new message, topic: "+topic+" , msg: "+str(message)+" , timestamp:"+str(nowTime))
         mqttClient.publish(topic,payload = json.dumps(message),qos = 0)
         time.sleep(collectCycle)

@@ -23,9 +23,10 @@ class AppClient():
         self.__consumer.subscribe(topics = subTuple)
         print("Connect to kafka client successfully,start to subscribe messages")
         for msg in self.__consumer:
+            nowTime = time.time()
             value = msg.value
             value = str(value,"utf-8")
-            print("New message come: "+ str(value)+ " , timestamp:"+str(time.time()))
             routeMsg = Message(value)
+            print("New message come: "+ str(value)+ " , timestamp:"+str(nowTime)+" , traceId:"+routeMsg.traceId)
             on_message_come(configClient,routeMsg)
 

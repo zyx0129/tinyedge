@@ -21,18 +21,26 @@ class DeviceClient(Device):
                 connectBroker()
 
         def on_message_come(client, userdata, msg):
-            print(msg.topic + " " + ":" + str(msg.payload))
+            nowTime = time.time()
+            traceId = self.generateTraceId()
             message = json.loads(msg.payload)
             deviceName = ""
             appId = ""
             data = None
+            timestamp = time.time()
             try:
                 deviceName = message["deviceName"]
-                appId = message["appId"]
                 data = message["data"]
+                if "appId" in message:
+                    appId = message["appId"]
+                if "time" in message:
+                    timestamp = message["time"]
+                if "traceId" in message:
+                    traceId = message["traceId"]
             except Exception as e:
                 print("wrong msg:"+str(msg.payload))
                 return
+            print("New message come: "+ str(msg.payload)+ " , dataTimestamp:"+str(timestamp) + " , arrivalTimestamp:"+str(nowTime)+  " , timeInterval:"+str(nowTime-timestamp) +" , traceId:"+traceId)
             if self.getScene() and "cache" in self.getScene():
                 cacheScene = self.getScene()["cache"]
                 if cacheScene:
@@ -43,6 +51,8 @@ class DeviceClient(Device):
             routeMsg.deviceName = deviceName
             routeMsg.appId = appId
             routeMsg.data = data
+            routeMsg.time = timestamp
+            routeMsg.traceId = traceId
             self.publish(routeMsg)
 
         def on_connect(client, userdata, flags, rc):

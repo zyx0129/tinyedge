@@ -11,6 +11,7 @@ class Message(object):
                 self.deviceName = msg["deviceName"]
                 self.time = msg["time"]
                 self.appId = msg["appId"]
+                self.traceId = msg["traceId"]
             except Exception as e:
                 print("wrong msg:"+str(msg))
         else:
@@ -19,3 +20,4 @@ class Message(object):
             self.deviceName = None
             self.time = time.time()
             self.appId = None
+            self.traceId = str(uuid.uuid4())

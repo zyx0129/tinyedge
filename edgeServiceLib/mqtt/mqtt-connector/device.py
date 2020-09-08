@@ -7,6 +7,7 @@ import time
 import os
 from abc import abstractmethod
 from abc import ABC
+import uuid
 
 class Device(ABC):
     def __init__(self):
@@ -124,7 +125,7 @@ class Device(ABC):
         else:
             print("Warning: Missing default route,the message will be discarded")
             return
-        print("Publish new message, topic: "+topic+" , msg: "+str(msg.__dict__)+" , timestamp:"+str(time.time()))
+        print("Publish new message, topic: "+topic+" , msg: "+str(msg.__dict__)+" , timestamp:"+str(time.time()) + " , traceId:" + msg.traceId)
         self.__producer.send(topic,bytes(json.dumps(msg.__dict__), encoding = "utf8"))
 
     def updateCache(self, deviceName,property,value, uploadTime = 0):
@@ -145,6 +146,8 @@ class Device(ABC):
             nowTime = time.time()
         handleList(deviceName+":"+property,5,json.dumps({"value":value,"time":nowTime}))
 
+    def generateTraceId(self):
+        return str(uuid.uuid4())
     # def updateCache(self, msg):
     #     if not self.__producer:
     #         self.initProducer()

@@ -2,7 +2,7 @@ url="registry.cn-hangzhou.aliyuncs.com"
 namespace="tinyedge"
 module_name="virtual-mqtt-lightsensor"
 architecture="amd64"
-version="v1.0"
+version="v2.0"
 docker build -t ${module_name} .
 docker tag ${module_name} ${url}/${namespace}/${module_name}:${architecture}-${version}
 docker tag ${module_name} ${url}/${namespace}/${module_name}

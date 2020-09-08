@@ -4,6 +4,7 @@ import requests
 import redis
 import time
 import os
+import uuid
 
 class Message(object):
     def __init__(self,msg = None):
@@ -15,6 +16,7 @@ class Message(object):
                 self.deviceName = msg["deviceName"]
                 self.time = msg["time"]
                 self.appId = msg["appId"]
+                self.traceId = msg["traceId"]
             except Exception as e:
                 print("wrong msg:"+str(msg))
         else:
@@ -23,6 +25,7 @@ class Message(object):
             self.deviceName = None
             self.time = time.time()
             self.appId = None
+            self.traceId = str(uuid.uuid4())
 
 class Client:
     def __init__(self):
@@ -83,6 +86,9 @@ class Client:
             time.sleep(2)
             self.initRedis()
 
+    def generateTraceId(self):
+        return str(uuid.uuid4())
+
     def publish(self, msg):
         if not self.__producer:
             self.initProducer()
@@ -95,7 +101,7 @@ class Client:
         else:
             print("Warning: Missing default route,the message will be discarded")
             return
-        print("Publish new message, topic: "+topic+" , msg: "+str(msg.__dict__)+" , timestamp:"+str(time.time()))
+        print("Publish new message, topic: "+topic+" , msg: "+str(msg.__dict__)+" , timestamp:"+str(time.time()) + " , traceId:" + msg.traceId)
         self.__producer.send(topic,bytes(json.dumps(msg.__dict__), encoding = "utf8"))
 
     def callDeviceService(self, deviceName,service,payload):
