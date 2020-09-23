@@ -1,5 +1,6 @@
 import json 
 import time
+import uuid
 
 class Message(object):
     def __init__(self,msg = None):

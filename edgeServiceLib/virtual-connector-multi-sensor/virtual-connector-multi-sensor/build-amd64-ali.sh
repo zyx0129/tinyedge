@@ -1,6 +1,6 @@
 url="registry.cn-hangzhou.aliyuncs.com"
 namespace="tinyedge"
-module_name="modbus"
+module_name="mqtt-connector"
 architecture="amd64"
 version="v2.0"
 docker build -t ${module_name} .

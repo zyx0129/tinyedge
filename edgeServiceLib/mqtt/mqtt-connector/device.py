@@ -148,12 +148,6 @@ class Device(ABC):
 
     def generateTraceId(self):
         return str(uuid.uuid4())
-    # def updateCache(self, msg):
-    #     if not self.__producer:
-    #         self.initProducer()
-    #     topic = "cache_redis"
-    #     print("topic:"+topic+" msg:"+str(msg.__dict__))
-    #     self.__producer.send(topic,bytes(json.dumps(msg.__dict__), encoding = "utf8"))
 
     @abstractmethod
     def initClient(self):

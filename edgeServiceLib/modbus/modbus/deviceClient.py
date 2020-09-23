@@ -36,6 +36,10 @@ class DeviceClient(Device):
                                     break
                                 task["next"] = time.monotonic()+ task["pollingInterval"]
                                 for value in values:
+                                    nowTime = time.time()
+                                    traceId = self.generateTraceId()
+                                    data = {propertyName:value}
+                                    print("New message come: "+ str(data)+ " , timestamp:"+str(nowTime) + " , traceId:"+traceId)
                                     if self.getScene() and "cache" in self.getScene():
                                         cacheScene = self.getScene()["cache"]
                                         if cacheScene:
@@ -44,7 +48,8 @@ class DeviceClient(Device):
                                     routeMsg.dataType = "data"
                                     routeMsg.deviceName = deviceName
                                     routeMsg.appId = appId
-                                    routeMsg.data = {propertyName:value}
+                                    routeMsg.data = data
+                                    routeMsg.traceId = traceId
                                     self.publish(routeMsg)
                     else:
                         if time.monotonic()>device["next"]:

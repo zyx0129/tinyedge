@@ -1,5 +1,6 @@
 from influxdb import InfluxDBClient
 from client import Client
+import time
 
 class Database:
     def __init__(self):
@@ -12,14 +13,15 @@ class Database:
 
 
     def connect(self):
-        # if self.__client:
-        #     return True
+        if self.__client:
+            return True
         try:
             self.__client = InfluxDBClient("edge-influx", 8086, self.__user, self.__password, self.__database)
             return True
         except:
-            self.__client = None
-            return False
+            print("connect influx failed")
+            time.sleep(1)
+            self.connect()            
 
     def execute_influx(self, query):
         return self.__client.query(query)
@@ -30,10 +32,14 @@ class Database:
             "tags": {
                 "deviceName": deviceName
             },
-            "time":time,
+            "time":int(time),
             "fields": content_json
         }]
-        self.__client.write_points(points)
+        try:
+            self.__client.write_points(points)
+        except Exception as e:
+            self.__client = InfluxDBClient("edge-influx", 8086, self.__user, self.__password, self.__database)
+            self.write(deviceName,content_json,time)
 
     def readlast(self, deviceName, identifier):
         sql = "select {} from data where deviceName = '{}' order by time desc limit 1".format(identifier, deviceName)
